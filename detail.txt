@@ -1,0 +1,12 @@
+<p>Insomnia adalah gangguan yang menyebabkan penderitanya sulit tidur atau tidak cukup tidur, meski terdapat cukup waktu untuk melakukannya. Gangguan ini bisa berdampak pada aktivitas penderita keesokan harinya.
+
+Waktu tidur dan kepuasan seseorang setelah tidur memengaruhi kualitas hidup dan kesehatan seseorang secara keseluruhan. Pada umumnya, orang membutuhkan 8 jam tidur dalam sehari untuk menjaga kondisi tubuh tetap fit. Waktu tidur yang terlalu lama atau malah terlalu sedikit dapat menimbulkan gangguan, baik fisik maupun mental. Namun, waktu tidur yang cukup juga tidak menjamin kondisi tubuh yang fit jika kualitas tidurnya tidak baik.</p> 
+<p><strong>Gejala</strong></p>
+
+<ul>
+  <li>Susah Tidur</li>
+  <li>Kelelahan saat beraktivitas</li>
+  <li>Sulit fokus saat beraktivitas</li>
+  <li>Daya ingat menurun</li>
+  <li>Fisik mengalami gangguan</li>
+</ul>
