@@ -11,8 +11,8 @@ if (!(isset($_SESSION['username']) && isset($_SESSION['password']))) {
   session_start();
   include "../../config/koneksi.php";
 
-  $module = $_GET[module];
-  $act = $_GET[act];
+  $module = $_GET["module"];
+  $act = $_GET["act"];
 
 // Hapus penyakit
   if ($module == 'penyakit' AND $act == 'hapus') {
@@ -22,9 +22,9 @@ if (!(isset($_SESSION['username']) && isset($_SESSION['password']))) {
 
 // Input penyakit
   elseif ($module == 'penyakit' AND $act == 'input') {
-    $nama_penyakit = $_POST[nama_penyakit];
-    $det_penyakit = $_POST[det_penyakit];
-    $srn_penyakit = $_POST[srn_penyakit];
+    $nama_penyakit = $_POST["nama_penyakit"];
+    $det_penyakit = $_POST["det_penyakit"];
+    $srn_penyakit = $_POST["srn_penyakit"];
     $fileName = $_FILES['gambar']['name'];
     move_uploaded_file($_FILES['gambar']['tmp_name'], "../../gambar/penyakit/" . $_FILES['gambar']['name']);
     mysqli_query($conn,"INSERT INTO penyakit(
@@ -37,9 +37,9 @@ if (!(isset($_SESSION['username']) && isset($_SESSION['password']))) {
 
 // Update penyakit
   elseif ($module == 'penyakit' AND $act == 'update') {
-    $nama_penyakit = $_POST[nama_penyakit];
-    $det_penyakit = $_POST[det_penyakit];
-    $srn_penyakit = $_POST[srn_penyakit];
+    $nama_penyakit = $_POST["nama_penyakit"];
+    $det_penyakit = $_POST["det_penyakit"];
+    $srn_penyakit = $_POST["srn_penyakit"];
 
     $fileName = $_FILES['gambar']['name'];
     if ($fileName) {

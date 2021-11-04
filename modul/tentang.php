@@ -69,7 +69,7 @@ html {
 <div class="row">
   <div class="column">
     <div class="card">
-      <img src="gambar/bintang.png" alt=Bintang" style="width:100%">
+      <img src="gambar/bintang.png" alt="Bintang" style="width:100%">
       <div class="container">
         <h2>Bintang Raharja</h2>
         <strong>Leader</strong>

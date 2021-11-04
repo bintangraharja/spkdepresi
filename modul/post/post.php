@@ -20,11 +20,11 @@
       }
       return (true);
     }
-    -- ></script>
+</script>
 <?php
 include "config/fungsi_alert.php";
 $aksi = "modul/post/aksi_post.php";
-switch ($_GET[act]) {
+switch ($_GET["act"]) {
     // Tampil post
     default:
         $offset = $_GET['offset'];
@@ -39,7 +39,7 @@ switch ($_GET[act]) {
 		  <tr><td><input class='btn bg-olive margin' type=button name=tambah value='Tambah Post' onclick=\"window.location.href='post/tambahpost';\"><input type=text name='keyword' style='margin-left: 10px;' placeholder='Ketik dan tekan cari...' class='form-control' value='$_POST[keyword]' /> <input class='btn bg-olive margin' type=submit value='   Cari   ' name=Go></td> </tr>
           </table></form>";
         $baris = mysqli_num_rows($tampil);
-        if ($_POST[Go]) {
+        if ($_POST["Go"]) {
             $numrows = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM post where nama_post like '%$_POST[keyword]%'"));
             if ($numrows > 0) {
                 echo "<div class='alert alert-success alert-dismissible'>
@@ -107,15 +107,15 @@ switch ($_GET[act]) {
                 while ($r = mysqli_fetch_array($hasil)) {
                     if ($counter % 2 == 0)
                         $warna = "dark";
-					if (strlen($r[det_post]) > 150)
+					if (strlen($r["det_post"]) > 150)
 					{
 						$maxLength = 140;
-						$r[det_post] = substr($r[det_post], 0, $maxLength);
+						$r["det_post"] = substr($r["det_post"], 0, $maxLength);
 						}
-						if (strlen($r[srn_post]) > 150)
+						if (strlen($r["srn_post"]) > 150)
 					{
 						$maxLength = 140;
-						$r[srn_post] = substr($r[srn_post], 0, $maxLength);
+						$r["srn_post"] = substr($r["srn_post"], 0, $maxLength);
 						}
                     else
                         $warna = "light";
@@ -189,8 +189,8 @@ switch ($_GET[act]) {
     case "editpost":
         $edit = mysqli_query($conn,"SELECT * FROM post WHERE kode_post='$_GET[id]'");
         $r = mysqli_fetch_array($edit);
-        if ($r[gambar]) {
-            $gambar = 'gambar/' . $r[gambar];
+        if ($r["gambar"]) {
+            $gambar = 'gambar/' . $r["gambar"];
         } else {
             $gambar = 'gambar/noimage.png';
         }

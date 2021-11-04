@@ -28,12 +28,11 @@ if (text_form.keyword.value == "")
 }
 return (true);
 }
--->
 </script>
 <?php
 include "config/fungsi_alert.php";
 $aksi="modul/gejala/aksi_gejala.php";
-switch($_GET[act]){
+switch($_GET["act"]){
 	// Tampil gejala
   default:
   $offset=$_GET['offset'];
@@ -49,7 +48,7 @@ switch($_GET[act]){
           </table></form>";
 		  $baris=mysqli_num_rows($tampil);
 		  
-	if ($_POST[Go]){
+	if ($_POST["Go"]){
 			$numrows = mysqli_num_rows(mysqli_query($conn,"SELECT * FROM gejala where nama_gejala like '%$_POST[keyword]%'"));
 			if ($numrows > 0){
 				echo "<div class='alert alert-success alert-dismissible'>

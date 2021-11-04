@@ -1,5 +1,4 @@
 <script language="JavaScript">
-<!----------
 
 function confirmIt 
 (dbMsg,okURL,cancelURL,aOkMsg,aCancelMsg,okTyp,cancelTyp,okWin,cancelWin) {
@@ -24,5 +23,4 @@ function confirmIt
 }
 
 
-//--------->
 </script>
