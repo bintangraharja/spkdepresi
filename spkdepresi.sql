@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2021 at 06:05 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Generation Time: Nov 06, 2021 at 07:13 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -243,10 +243,10 @@ CREATE TABLE `penyakit` (
 --
 
 INSERT INTO `penyakit` (`kode_penyakit`, `nama_penyakit`, `det_penyakit`, `srn_penyakit`, `gambar`) VALUES
-(1, 'Gangguan Mood', '', '', ''),
-(2, 'Depresi Ringan', '', '', ''),
-(3, 'Depresi Sedang', '', '', ''),
-(4, 'Depresi Berat', '', '', '');
+(1, 'Gangguan Mood', '', '<ul>\r\n  <li>Tidur yang cukup agar tidak kena mood swing</li>\r\n  <li>Terapkan pola hidup sehat</li>\r\n  <li>Rutin olahraga</li>\r\n  <li>Hindari konsumsi alkohol</li>\r\n</ul>', 'mood.jpg'),
+(2, 'Depresi Ringan', '', '<ul>\r\n  <li>Mencoba mencari perspektif baru</li>\r\n  <li>Mencoba untuk berpikir positif</li>\r\n  <li>Mencari dan memiliki orang yang selalu support</li>\r\n  <li>Ceritakan keluhan ataupun masalah ke orang yang dipercaya</li>\r\n</ul>', 'ringan.jpg'),
+(3, 'Depresi Sedang', '', '<ul>\r\n  <li>Bersosialisasi dengan orang terdekat</li>\r\n  <li>KJangan mengurung diri</li>\r\n  <li>Hindari kecanduan obat dan alkohol</li>\r\n  <li>Melakukan konsultasi dengan pihak medis</li>\r\n</ul>', 'sedang.jpg'),
+(4, 'Depresi Berat', '', '<ul>\r\n  <li>Wajib konsultasi rutin ke pihak medis</li>\r\n  <li>Konsumsi obat yang direkomedasikan oleh dokter</li>\r\n  <li>Tidur juga penting untuk menenangkan pikiran</li>\r\n  <li>Menghindari hal-hal yang dapat memicu stress</li>\r\n  <li>Menyerahkan sebagian kesusahan kepada orang terdekat, untuk mengurangi beban pikiran</li>\r\n</ul>', 'berat.jpg');
 
 -- --------------------------------------------------------
 
@@ -257,10 +257,20 @@ INSERT INTO `penyakit` (`kode_penyakit`, `nama_penyakit`, `det_penyakit`, `srn_p
 CREATE TABLE `post` (
   `kode_post` int(11) NOT NULL,
   `nama_post` varchar(255) NOT NULL,
-  `det_post` varchar(500) NOT NULL,
+  `det_post` varchar(1000) NOT NULL,
   `srn_post` varchar(500) NOT NULL,
   `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`kode_post`, `nama_post`, `det_post`, `srn_post`, `gambar`) VALUES
+(1, 'Gangguan Mood', '<p>Gangguan Mood adalah gangguan kesehatan mental yang memengaruhi keadaan emosi seseorang. Gangguan ini menyebabkan seseorang mengalami kebahagiaan yang ekstrem, kesedihan yang ekstrem, atau keduanya secara bergantian, dalam waktu yang lama. Gangguan Mood memang normal terjadi pada setiap orang. Seseorang bisa merasakan sedih, marah, dan bahagia dari waktu ke waktu, tergantung keadaan saat itu. Namun, penderita mood disorder cenderung memiliki suasana hati yang tidak sesuai dengan keadaannya. Dalam kondisi yang parah, seseorang dengan gangguan mood dapat memiliki kecenderungan untuk menyakiti diri sendiri atau orang lain, hingga keinginan untuk bunuh diri.</p>', '<ul>\r\n  <li>Tidur yang cukup agar tidak kena mood swing</li>\r\n  <li>Terapkan pola hidup sehat</li>\r\n  <li>Rutin olahraga</li>\r\n  <li>Hindari konsumsi alkohol</li>\r\n</ul>', 'mood.jpg'),
+(2, 'Depresi Ringan', '<p> Orang yang merasakan depresi ringan, biasanya merasakan perasaan lebih dari sekadar sedih. Ciri-ciri depresi ringan ini bisa berlangsung selama berhari-hari dan mengganggu aktivitas yang biasanya dilakukan. Biasanya ditandai dengan mudah marah, kehilangan minat beraktivitas, nafsu makan menurun, dan hilang motivasi. </p>', '<ul>\r\n  <li>Mencoba mencari perspektif baru</li>\r\n  <li>Mencoba untuk berpikir positif</li>\r\n  <li>Mencari dan memiliki orang yang selalu support</li>\r\n  <li>Ceritakan keluhan ataupun masalah ke orang yang dipercaya</li>\r\n</ul>', 'ringan.jpg'),
+(3, 'Depresi Sedang', '<p> Dalam hal keparahan gejala, depresi sedang naik tingkat dari kasus ringan. Depresi sedang dan ringan memiliki tanda yang sama, hanya saja lebih parah. Biasanya ditandai dengan merasa rendah diri, produktivitas berkurang, merasa tidak berharga, merasa gelisah, dan sering merasa khawatir. </p>', '<ul>\r\n  <li>Bersosialisasi dengan orang terdekat</li>\r\n  <li>KJangan mengurung diri</li>\r\n  <li>Hindari kecanduan obat dan alkohol</li>\r\n  <li>Melakukan konsultasi dengan pihak medis</li>\r\n</ul>', 'sedang.jpg'),
+(4, 'Depresi Berat', '<p> Depresi tingkat berat ini biasanya menimbulkan gejala yang berlangsung rata-rata 6 bulan atau lebih. Kadang, gejalanya bisa hilang beberapa saat, tapi bisa juga kembali berulang. Biasanya ditandai dengan halusinasi, sampai dengan tahap merasa ingin <strong>bunuh diri</strong></p>', '<ul>\r\n  <li>Wajib konsultasi rutin ke pihak medis</li>\r\n  <li>Konsumsi obat yang direkomedasikan oleh dokter</li>\r\n  <li>Tidur juga penting untuk menenangkan pikiran</li>\r\n  <li>Menghindari hal-hal yang dapat memicu stress</li>\r\n  <li>Menyerahkan sebagian kesusahan kepada orang terdekat, untuk mengurangi beban pikiran</li>\r\n</ul>', 'berat.jpg');
 
 --
 -- Indexes for dumped tables
@@ -328,7 +338,7 @@ ALTER TABLE `penyakit`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `kode_post` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kode_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
