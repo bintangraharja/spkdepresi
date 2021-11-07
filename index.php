@@ -12,7 +12,7 @@ include "config/fungsi_alert.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <base href="http://localhost/spkdepresi-master/">
+    <base href="http://localhost/spkdepresi/">
     <link href="css/font-awesome-4.2.0/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/owl-carousel/owl.carousel.css" rel="stylesheet"  media="all">
     <link href="css/owl-carousel/owl.theme.css" rel="stylesheet"  media="all">
