@@ -8,7 +8,7 @@ switch ($_GET['act']) {
       date_default_timezone_set("Asia/Jakarta");
       $inptanggal = date('Y-m-d H:i:s');
 
-      $arbobot = array('0', '1', '0.75', '0.5', '0.25', '0');
+      $arbobot = array('0.0001', '1', '0.75', '0.5', '0.25', '0.0001');
       $argejala = array();
 
       for ($i = 0; $i < count($_POST['kondisi']); $i++) {
@@ -42,7 +42,7 @@ switch ($_GET['act']) {
         $sqlgejala = mysqli_query($conn, "SELECT * FROM basis_pengetahuan where kode_penyakit=$rpenyakit[kode_penyakit]");
         $cflama = 0;
         while ($rgejala = mysqli_fetch_array($sqlgejala)) {
-          $arkondisi = explode("_", $_POST['kondisi'][0]);  
+          $arkondisi = explode("_", $_POST['kondisi'][0]);
           $gejala = $arkondisi[0];
 
           for ($i = 0; $i < count($_POST['kondisi']); $i++) {
