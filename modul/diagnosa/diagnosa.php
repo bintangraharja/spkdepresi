@@ -8,7 +8,7 @@ switch ($_GET['act']) {
       date_default_timezone_set("Asia/Jakarta");
       $inptanggal = date('Y-m-d H:i:s');
 
-      $arbobot = array('0.0001', '1', '0.75', '0.5', '0.25', '0.0001');
+      $arbobot = array('0', '1', '0.75', '0.5', '0.25', '0');
       $argejala = array();
 
       for ($i = 0; $i < count($_POST['kondisi']); $i++) {
@@ -31,7 +31,7 @@ switch ($_GET['act']) {
         $argpkt[$rpkt['kode_penyakit']] = $rpkt['gambar'];
       }
 
-      //print_r($arkondisitext);
+
 // -------- perhitungan certainty factor (CF) ---------
 // --------------------- START ------------------------
       $sqlpenyakit = mysqli_query($conn, "SELECT * FROM penyakit order by kode_penyakit");
@@ -62,21 +62,32 @@ switch ($_GET['act']) {
             }
           }
         }
-        if ($cflama > 0) {
+        
+          if ($cflama != 0) {
           $arpenyakit += array($rpenyakit["kode_penyakit"] => number_format($cflama, 4));
         }
       }
+      if($arpenyakit[1] < 0 && $arpenyakit[2] < 0 && $arpenyakit[1] < 0 && $arpenyakit[4] < 0  ){
+          $arpenyakit[1] += 1;
+          $arpenyakit[2] += 1;
+          $arpenyakit[3] += 1;
+          $arpenyakit[4] += 1;
+      }
+
 
       arsort($arpenyakit);
 
       $inpgejala = serialize($argejala);
       $inppenyakit = serialize($arpenyakit);
 
+
+
       $np1 = 0;
       foreach ($arpenyakit as $key1 => $value1) {
         $np1++;
         $idpkt1[$np1] = $key1;
         $vlpkt1[$np1] = $value1;
+
       }
 // --------------------- END -------------------------
 
@@ -106,7 +117,10 @@ switch ($_GET['act']) {
         $idpkt[$np] = $key;
         $nmpkt[$np] = $arpkt[$key];
         $vlpkt[$np] = $value;
+
+
       }
+
       if ($argpkt[$idpkt[1]]) {
         $gambar = 'gambar/penyakit/' . $argpkt[$idpkt[1]];
       } else {
