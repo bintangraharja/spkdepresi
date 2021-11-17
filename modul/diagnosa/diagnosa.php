@@ -62,7 +62,7 @@ switch ($_GET['act']) {
             }
           }
         }
-        
+
           if ($cflama != 0) {
           $arpenyakit += array($rpenyakit["kode_penyakit"] => number_format($cflama, 4));
         }
