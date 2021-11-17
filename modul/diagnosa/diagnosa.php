@@ -8,7 +8,7 @@ switch ($_GET['act']) {
       date_default_timezone_set("Asia/Jakarta");
       $inptanggal = date('Y-m-d H:i:s');
 
-      $arbobot = array('0', '1', '0.75', '0.5', '0.25', '0');
+      $arbobot = array('0', '1', '0.7', '0.3', '-0.4', '-1');
       $argejala = array();
 
       for ($i = 0; $i < count($_POST['kondisi']); $i++) {
@@ -36,34 +36,60 @@ switch ($_GET['act']) {
 // --------------------- START ------------------------
       $sqlpenyakit = mysqli_query($conn, "SELECT * FROM penyakit order by kode_penyakit");
       $arpenyakit = array();
+      $j = 0;
       while ($rpenyakit = mysqli_fetch_array($sqlpenyakit)) {
         $cftotal_temp = 0;
         $cf = 0;
-        $sqlgejala = mysqli_query($conn, "SELECT * FROM basis_pengetahuan where kode_penyakit=$rpenyakit[kode_penyakit]");
-        $cflama = 0;
-        while ($rgejala = mysqli_fetch_array($sqlgejala)) {
-          $arkondisi = explode("_", $_POST['kondisi'][0]);
-          $gejala = $arkondisi[0];
-
+        $sqlgejala = mysqli_query($conn, "SELECT * FROM basis_pengetahuan where kode_penyakit=$rpenyakit[kode_penyakit] ORDER BY kode_gejala");
+        $cflama = 0;$k = 0;
+        while ($rgejala = mysqli_fetch_assoc($sqlgejala)) {
+          // print_r($k++);
+          // echo (" ");
+          // print_r($rgejala);
+          // echo ("<br>");
           for ($i = 0; $i < count($_POST['kondisi']); $i++) {
             $arkondisi = explode("_", $_POST['kondisi'][$i]);
             $gejala = $arkondisi[0];
             if ($rgejala['kode_gejala'] == $gejala) {
-              $cf = ($rgejala['mb'] - $rgejala['md']) * $arbobot[$arkondisi[1]];
-              if (($cf >= 0) && ($cf * $cflama >= 0)) {
+              $cf = (($rgejala['mb'] - $rgejala['md'])) * $arbobot[$arkondisi[1]];
+              // if(($cflama >= 0) && $cf )
+              if($j = 0){
+                $cflama += $cf;
+              }
+              // else{
+              //   $cflama = $cflama + $cf * (1-$cflama);
+              // }
+              // $cf = ($rgejala['mb'] - $rgejala['md']) * $arbobot[$arkondisi[1]];
+              else if (($cf >= 0) && ($cf * $cflama >= 0)) {
                 $cflama = $cflama + ($cf * (1 - $cflama));
+                // print_r("(ini if 1 )");
               }
-              if ($cf * $cflama < 0) {
+              else if ($cf * $cflama < 0) {
                 $cflama = ($cflama + $cf) / (1 - Min(abs($cflama), abs($cf)));
+                // print_r("(ini if 2 )");
               }
-              if (($cf < 0) && ($cf * $cflama >= 0)) {
-                $cflama = $cflama + ($cf * (1 + $cflama));
+              else if (($cf < 0) && ($cf * $cflama >= 0)) {
+                $cflama = abs($cflama) + ($cf * (1 + $cflama));
+                // print_r("(ini if 3 )");
               }
+              $j++;
+              // print_r($j++);
+              // echo(" ");
+              // print_r($cflama);
+              // echo("    ");
+              // print_r($cf);
+              // echo("    ");
+              // print_r($rgejala['mb']);
+              // echo("    ");
+              // print_r($rgejala['md']);
+              // echo("<br>");
             }
           }
+          $j = 0;
         }
-
-          if ($cflama != 0) {
+        print_r($cflama);
+        echo("<br>");
+        if ($cflama >= 0) {
           $arpenyakit += array($rpenyakit["kode_penyakit"] => number_format($cflama, 4));
         }
       }
@@ -79,6 +105,9 @@ switch ($_GET['act']) {
 
       $inpgejala = serialize($argejala);
       $inppenyakit = serialize($arpenyakit);
+      // exit();
+
+      
 
 
 
@@ -92,7 +121,7 @@ switch ($_GET['act']) {
 // --------------------- END -------------------------
 
       echo "<div class='content'>
-	<h2 class='text text-primary'>Hasil Kriteria &nbsp;&nbsp;<button id='print' onClick='window.print();' data-toggle='tooltip' data-placement='right' title='Klik tombol ini untuk mencetak hasil analisa'><i class='fa fa-print'></i> Cetak</button> </h2>
+	<h2 class='text text-primary'>Hasil Kriteria &nbsp;&nbsp; </h2>
 	          <hr><table class='table table-bordered table-striped diagnosa'> 
           <th width=8%>No</th>
           <th width=10%>Kode</th>
@@ -127,7 +156,7 @@ switch ($_GET['act']) {
         $gambar = 'gambar/noimage.png';
       }
       echo "</table><div class='well well-small'><img class='card-img-top img-bordered-sm' style='float:right; margin-left:15px;' src='" . $gambar . "' height=200><h3>Hasil Analisa</h3>";
-      echo "<div class='callout callout-default'>Penyakit yang teridentifikasi adalah <b><h3 class='text text-success'>" . $nmpkt[1] . "</b> / " . (round($vlpkt[1], 2)*100) . " % (" . $vlpkt[1] . ")<br></h3>";
+      echo "<div class='callout callout-default'>Penyakit yang teridentifikasi adalah <b><h3 class='text text-success'>" . $nmpkt[1] . "</b> / " . abs(round($vlpkt[1], 2)*100) . " % (" . abs($vlpkt[1]) . ")<br></h3>";
       echo "</h4></div></div>
           <div class='box box-success box-solid'><div class='box-header with-border'><h3 class='box-title'>Saran</h3></div><div class='box-body'><h4>";
       echo $arspkt[$idpkt[1]];
