@@ -8,7 +8,7 @@ switch ($_GET['act']) {
       date_default_timezone_set("Asia/Jakarta");
       $inptanggal = date('Y-m-d H:i:s');
 
-      $arbobot = array('0', '1', '0.7', '0.3', '-0.4', '-1');
+      $arbobot = array('0', '1', '0.8', '-0.2', '-0.6', '-1');
       $argejala = array();
 
       for ($i = 0; $i < count($_POST['kondisi']); $i++) {
@@ -36,12 +36,11 @@ switch ($_GET['act']) {
 // --------------------- START ------------------------
       $sqlpenyakit = mysqli_query($conn, "SELECT * FROM penyakit order by kode_penyakit");
       $arpenyakit = array();
-      $j = 0;
       while ($rpenyakit = mysqli_fetch_array($sqlpenyakit)) {
-        $cftotal_temp = 0;
         $cf = 0;
         $sqlgejala = mysqli_query($conn, "SELECT * FROM basis_pengetahuan where kode_penyakit=$rpenyakit[kode_penyakit] ORDER BY kode_gejala");
         $cflama = 0;$k = 0;
+        $j = 0;
         while ($rgejala = mysqli_fetch_assoc($sqlgejala)) {
           // print_r($k++);
           // echo (" ");
@@ -50,42 +49,46 @@ switch ($_GET['act']) {
           for ($i = 0; $i < count($_POST['kondisi']); $i++) {
             $arkondisi = explode("_", $_POST['kondisi'][$i]);
             $gejala = $arkondisi[0];
-            if ($rgejala['kode_gejala'] == $gejala) {
-              $cf = (($rgejala['mb'] - $rgejala['md'])) * $arbobot[$arkondisi[1]];
-              // if(($cflama >= 0) && $cf )
-              if($j = 0){
-                $cflama += $cf;
-              }
-              // else{
-              //   $cflama = $cflama + $cf * (1-$cflama);
-              // }
-              // $cf = ($rgejala['mb'] - $rgejala['md']) * $arbobot[$arkondisi[1]];
-              else if (($cf >= 0) && ($cf * $cflama >= 0)) {
-                $cflama = $cflama + ($cf * (1 - $cflama));
-                // print_r("(ini if 1 )");
-              }
-              else if ($cf * $cflama < 0) {
-                $cflama = ($cflama + $cf) / (1 - Min(abs($cflama), abs($cf)));
-                // print_r("(ini if 2 )");
-              }
-              else if (($cf < 0) && ($cf * $cflama >= 0)) {
-                $cflama = abs($cflama) + ($cf * (1 + $cflama));
-                // print_r("(ini if 3 )");
-              }
-              $j++;
-              // print_r($j++);
-              // echo(" ");
-              // print_r($cflama);
-              // echo("    ");
-              // print_r($cf);
-              // echo("    ");
-              // print_r($rgejala['mb']);
-              // echo("    ");
-              // print_r($rgejala['md']);
-              // echo("<br>");
-            }
+//            if($arbobot[$arkondisi[1]] > -1){
+                if ($rgejala['kode_gejala'] == $gejala) {
+                    $cf = (($rgejala['mb'] - $rgejala['md'])) * $arbobot[$arkondisi[1]];
+                    // if(($cflama >= 0) && $cf )
+                    if($j == 0){
+                        $cflama += $cf;
+                    }
+                    // else{
+//                    //   $cflama = $cflama + $cf * (1-$cflama);
+//                    // }
+//                    // $cf = ($rgejala['mb'] - $rgejala['md']) * $arbobot[$arkondisi[1]];
+//                    else
+                        if (($cf >= 0) && ($cf * $cflama >= 0)) {
+                        $cflama = $cflama + ($cf * (1 - $cflama));
+                        // print_r("(ini if 1 )");
+                    }
+                    else if ($cf * $cflama < 0) {
+                        $cflama = ($cflama + $cf) / (1 - Min(abs($cflama), abs($cf)));
+                        // print_r("(ini if 2 )");
+                    }
+                    else if (($cf < 0) && ($cf * $cflama >= 0)) {
+                        $cflama = $cflama + ($cf * (1 + $cflama));
+                        // print_r("(ini if 3 )");
+                    }
+                    $j++;
+                    // print_r($j++);
+                    // echo(" ");
+                    // print_r($cflama);
+                    // echo("    ");
+                    // print_r($cf);
+                    // echo("    ");
+                    // print_r($rgejala['mb']);
+                    // echo("    ");
+                    // print_r($rgejala['md']);
+                    // echo("<br>");
+                }
+//            }
+
           }
-          $j = 0;
+//          $j = 0;
         }
         print_r($cflama);
         echo("<br>");
@@ -93,12 +96,12 @@ switch ($_GET['act']) {
           $arpenyakit += array($rpenyakit["kode_penyakit"] => number_format($cflama, 4));
         }
       }
-      if($arpenyakit[1] < 0 && $arpenyakit[2] < 0 && $arpenyakit[1] < 0 && $arpenyakit[4] < 0  ){
-          $arpenyakit[1] += 1;
-          $arpenyakit[2] += 1;
-          $arpenyakit[3] += 1;
-          $arpenyakit[4] += 1;
-      }
+//      if($arpenyakit[1] < 0 && $arpenyakit[2] < 0 && $arpenyakit[1] < 0 && $arpenyakit[4] < 0  ){
+//          $arpenyakit[1] += 1;
+//          $arpenyakit[2] += 1;
+//          $arpenyakit[3] += 1;
+//          $arpenyakit[4] += 1;
+//      }
 
 
       arsort($arpenyakit);
