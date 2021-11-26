@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2021 at 07:13 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.26
+-- Generation Time: Nov 26, 2021 at 08:08 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,7 @@ CREATE TABLE `basis_pengetahuan` (
 
 INSERT INTO `basis_pengetahuan` (`kode_pengetahuan`, `kode_penyakit`, `kode_gejala`, `mb`, `md`) VALUES
 (1, 1, 1, 0.75, 0.25),
-(2, 1, 2, 0.75, 0.25),
+(2, 1, 2, 0.8, 0.2),
 (3, 1, 3, 0.75, 0.25),
 (4, 1, 4, 0.85, 0.15),
 (5, 1, 5, 0.75, 0.25),
@@ -326,7 +326,7 @@ ALTER TABLE `gejala`
 -- AUTO_INCREMENT for table `kondisi`
 --
 ALTER TABLE `kondisi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `penyakit`
