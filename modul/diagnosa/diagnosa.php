@@ -4,7 +4,7 @@ switch ($_GET['act']) {
 
   default:
     if ($_POST['submit']) {
-      $arcolor = array('#ffffff', '#cc66ff', '#019AFF', '#00CBFD', '#00FEFE', '#A4F804', '#FFFC00', '#FDCD01', '#FD9A01', '#FB6700');
+      $arcolor = array('#ffffff', '#47f063', '#7ccf55', '#FDCD01', '#FD9A01', '#FB6700', '#FFFC00', '#FDCD01', '#FD9A01', '#FB6700');
       date_default_timezone_set("Asia/Jakarta");
       $inptanggal = date('Y-m-d H:i:s');
 
@@ -90,8 +90,8 @@ switch ($_GET['act']) {
           }
 //          $j = 0;
         }
-        print_r($cflama);
-        echo("<br>");
+        //print_r($cflama);
+        //echo("<br>");
         if ($cflama >= 0) {
           $arpenyakit += array($rpenyakit["kode_penyakit"] => number_format($cflama, 4));
         }
@@ -196,7 +196,7 @@ switch ($_GET['act']) {
         ?>
         <script type="text/javascript">
           $(document).ready(function () {
-            var arcolor = new Array('#ffffff', '#cc66ff', '#019AFF', '#00CBFD', '#00FEFE', '#A4F804', '#FFFC00', '#FDCD01', '#FD9A01', '#FB6700');
+            var arcolor = new Array('#ffffff', '#47f063', '#7ccf55', '#FDCD01', '#FD9A01', '#FB6700', '#FFFC00', '#FDCD01', '#FD9A01', '#FB6700');
             setColor();
             $('.pilihkondisi').on('change', 'tr td select#sl<?php echo $i; ?>', function () {
               setColor();
